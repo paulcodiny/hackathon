@@ -12,8 +12,8 @@ app:
     - "443:443"
   links:
     - redis
-    - redis_user
-    - redis_other
+    - redisUser
+    - redisOther
     - pg
     - mc
     - mysql
@@ -21,14 +21,14 @@ redis:
   image: redis:2.8
   volumes:
     - /var/db/redis:/data
-redis_user:
+redisUser:
   image: redis:2.8
   volumes:
-    - /var/db/redis_user:/data
-redis_other:
+    - /var/db/redisUser:/data
+redisOther:
   image: redis:2.8
   volumes:
-    - /var/db/redis_other:/data
+    - /var/db/redisOther:/data
 pg:
   image: sameersbn/postgresql:9.4
   volumes:
