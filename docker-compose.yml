@@ -8,25 +8,23 @@ app:
     TOPFACE_USER: whatever
     PLATFORM: dev
   ports:
-    - "80:80"
-    - "443:443"
+    - 80:80
+    - 443:443
   links:
     - redis
-    - pg
+    - stat
     - mc
     - mysql
 redis:
   image: redis:2.8
   volumes:
     - /var/db/redis:/data
-pg:
-  image: sameersbn/postgresql:9.4
-  volumes:
-    - /var/db/postgresql/:/var/lib/postgresql/
-  environment:
-    DB_USER: hackathon
-    DB_PASS: sosecretpassword
-    DB_NAME: hackathon
+stat:
+  build: ./hackathon-stat
+  ports:
+    - 13200:13200
+  links:
+    - mysql
 mysql:
   image: mysql
   environment:
