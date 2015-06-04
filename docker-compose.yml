@@ -13,8 +13,9 @@ app:
   links:
     - redis
     - redisUser
+    - redisEvent
+    - redisStatistics
     - redisOther
-    - pg
     - mc
     - mysql
 redis:
@@ -25,18 +26,18 @@ redisUser:
   image: redis:2.8
   volumes:
     - /var/db/redisUser:/data
+redisEvent:
+  image: redis:2.8
+  volumes:
+    - /var/db/redisEvent:/data
+redisStatistics:
+  image: redis:2.8
+  volumes:
+    - /var/db/redisStatistics:/data
 redisOther:
   image: redis:2.8
   volumes:
     - /var/db/redisOther:/data
-pg:
-  image: sameersbn/postgresql:9.4
-  volumes:
-    - /var/db/postgresql/:/var/lib/postgresql/
-  environment:
-    DB_USER: hackathon
-    DB_PASS: sosecretpassword
-    DB_NAME: hackathon
 mysql:
   image: mysql
   environment:

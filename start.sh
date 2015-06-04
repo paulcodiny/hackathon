@@ -10,6 +10,10 @@ mkdir -p /var/log/hackathon/nginx
 mkdir -p /var/log/hackathon/php-fpm
 mkdir -p /var/www/project
 mkdir -p /var/db/redis
+mkdir -p /var/db/redisUser
+mkdir -p /var/db/redisEvent
+mkdir -p /var/db/redisStatistics
+mkdir -p /var/db/redisOther
 mkdir -p /var/db/postgresql/
 mkdir -p /var/db/mysql/
 
