@@ -1,43 +1,33 @@
 app:
   build: ./hackathon-app
   volumes:
-    - /var/log/hackathon/nginx:/var/log/nginx
-    - /var/log/hackathon/php-fpm:/var/log/php5-fpm
-    - /var/www/project:/var/www/project
+    - /Users/pavlik/Projects/photo-contest/log/nginx:/var/log/nginx
+    - /Users/pavlik/Projects/photo-contest/log/php-fpm:/var/log/php5-fpm
+    - /Users/pavlik/Projects/hackathon-photo-contest:/var/www/project
   environment:
-    TOPFACE_USER: whatever
+    TOPFACE_USER: pavlik
     PLATFORM: dev
   ports:
     - "80:80"
     - "443:443"
   links:
-    - redis
-    - redisUser
-    - redisEvent
-    - redisStatistics
-    - redisOther
-    - mc
-    - mysql
+    - redis:hackathon_redis_1
+    - redisUser:hackathon_redisUser_1
+    - redisEvent:hackathon_redisEvent_1
+    - redisStatistics:hackathon_redisStatisitcs_1
+    - redisOther:hackathon_redisOther_1
+    - mc:hackathon_mc_1
+    - mysql:hackathon_mysql_1
 redis:
   image: redis:2.8
-  volumes:
-    - /var/db/redis:/data
 redisUser:
   image: redis:2.8
-  volumes:
-    - /var/db/redisUser:/data
 redisEvent:
   image: redis:2.8
-  volumes:
-    - /var/db/redisEvent:/data
 redisStatistics:
   image: redis:2.8
-  volumes:
-    - /var/db/redisStatistics:/data
 redisOther:
   image: redis:2.8
-  volumes:
-    - /var/db/redisOther:/data
 mysql:
   image: mysql
   environment:
@@ -45,8 +35,6 @@ mysql:
     MYSQL_USER: hackathon
     MYSQL_PASSWORD: hackathonpassword
     MYSQL_DATABASE: hackathon
-  volumes:
-    - /var/db/mysql:/var/lib/mysql
 mc:
   image: memcached:latest
   command: memcached -m 512
